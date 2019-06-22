@@ -4,9 +4,9 @@
   "description": "Simple Date Range Picker with mobile friendly elements",
   "author": "Arik Sasmita",
   "license": "MIT",
-  "homepage": "TBA",
+  "homepage": "https://github.com/ariksasmita/vue-daterangepicker-mobile",
   "bugs": {
-    "url": "TBA"
+    "url": "https://github.com/ariksasmita/vue-daterangepicker-mobile/issues"
   },
   "repository": {
     "type": "git",
