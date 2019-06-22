@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wangyingjun/vue-calendar-mobile.git"
+    "url": "git+https://github.com/ariksasmita/vue-daterangepicker-mobile"
   },
 
   "main": "dist/vue-daterangepicker-mobile.ssr.js",
