@@ -1,44 +1,47 @@
 <template>
   <div class="daterangepicker-mobile">
-    <div class="calendar-header">
-      <button
-        :disabled="prevMonthBtnStatus"
-        @click="prev">
-        &lt; {{ prevMonthLabel }}
-      </button>
-      <h3 ref="monthYear" class="month-year">
-        {{ currentDate.getFullYear() }} {{ months[currentDate.getMonth()] }}
-      </h3>
-      <button
-        :disabled="nextMonthBtnStatus"
-        @click="next">
-        {{ nextMonthLabel }} &gt;
-      </button>
+    <div class="daterangepicker-header">
+      <div class="daterangepicker-cell">
+        <button
+          :disabled="prevMonthBtnStatus"
+          @click="prev">
+          &lt; {{ prevMonthLabel }}
+        </button>
+      </div>
+      <div class="daterangepicker-cell">
+        <h3 ref="monthYear" class="month-year">
+          {{ currentDate.getFullYear() }} {{ months[currentDate.getMonth()] }}
+        </h3>
+      </div>
+      <div class="daterangepicker-cell">
+        <button
+          :disabled="nextMonthBtnStatus"
+          @click="next">
+          {{ nextMonthLabel }} &gt;
+        </button>
+      </div>
     </div>
 
-    <table
-      class="calendar-body">
-      <thead>
-        <tr>
-          <th v-for="(weekDay, index) in weekDays" :key="index">{{ weekDay }}</th>
-        </tr>
-      </thead>
-
-      <tbody class="calendar-body">
-        <tr
-          v-for="(itm, index) in datesArray"
-          :key="index">
-          <td
-            v-for="date in itm"
-            :key="date.milis"
-            :ref="date.milis"
-            :class="date.classes.join(' ')"
-            @click="dateClickhandler(date.milis, date.classes)">
-            {{ date.day }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="daterangepicker-body">
+      <div
+        class="daterangepicker-row week-days">
+          <div v-for="(weekDay, index) in weekDays" :key="index" class="daterangepicker-cell">{{ weekDay }}</div>
+      </div>
+      <div
+        v-for="(itm, index) in datesArray"
+        :key="index"
+        class="daterangepicker-row">
+        <div
+          v-for="date in itm"
+          :key="date.milis"
+          :ref="date.milis"
+          :class="date.classes.join(' ')"
+          @click="dateClickhandler(date.milis, date.classes)"
+          class="daterangepicker-cell">
+          {{ date.day }}
+        </div>
+      </div>
+    </div>
     <div v-if="showReset">
       <button @click="resetMarks">
         Reset
@@ -80,7 +83,7 @@ export default {
     },
     showResult: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   data () {
@@ -247,12 +250,37 @@ export default {
 .daterangepicker-mobile {
   font-family: sans-serif;
 }
-.calendar-header > button,
-.calendar-header > h3 {
-  display: inline-block;
+.daterangepicker-header {
+  max-width: 322px;
+  display: table;
+  width: 100%;
 }
-.month-year {
-  margin: 20px;
+.daterangepicker-header button {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+}
+.daterangepicker-header .daterangepicker-cell {
+  cursor: default;
+}
+.daterangepicker-body {
+  display: table;
+}
+.daterangepicker-row {
+  display: table-row;
+}
+.week-days .daterangepicker-cell {
+  padding: 10px 2px;
+}
+.daterangepicker-cell {
+  display: table-cell;
+  padding: 10px;
+  min-width: 46px;
+  min-height: 46px;
+  cursor: pointer;
+  border: 1px solid white;
+  text-align: center;
+  box-sizing: border-box;
 }
 .offset {
   color: lightgray;
@@ -261,19 +289,12 @@ export default {
   background: lightblue;
   color: white;
 }
-.calendar-body td {
-  cursor: pointer;
-}
-td.in-range:not(.clicked) {
+.daterangepicker-cell.in-range:not(.clicked) {
   color: white;
   background: lightgray;
 }
-td.disabled {
+.daterangepicker-cell.disabled {
   color: gray;
   background: lightgray;
-}
-td {
-  min-width: 37px;
-  line-height: 37px;
 }
 </style>
