@@ -1,6 +1,6 @@
 {
   "name": "vue-daterangepicker-mobile",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Simple Date Range Picker with mobile friendly elements",
   "author": "Arik Sasmita",
   "license": "MIT",
@@ -12,35 +12,32 @@
     "type": "git",
     "url": "git+https://github.com/ariksasmita/vue-daterangepicker-mobile"
   },
-
   "main": "dist/vue-daterangepicker-mobile.ssr.js",
   "module": "dist/vue-daterangepicker-mobile.esm.js",
   "unpkg": "dist/vue-daterangepicker-mobile.min.js",
-
+  "browser": {
+    "./sfc": "src/vue-daterangepicker-mobile.vue"
+  },
   "files": [
     "dist/*",
-    "src/**/*.vue"
+    "src/*"
   ],
-
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
-    "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
-    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
-    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
+    "build": "npm run build:unpkg & npm run build:es & npm run build:umd",
+    "build:umd": "cross-env NODE_ENV=production rollup --extend --config build/rollup.config.js --format umd --file dist/vue-daterangepicker-mobile.umd.js",
+    "build:es": "cross-env NODE_ENV=production rollup --extend --config build/rollup.config.js --format es --file dist/vue-daterangepicker-mobile.esm.js",
+    "build:unpkg": "cross-env NODE_ENV=production rollup --extend --config build/rollup.config.js --format iife --file dist/vue-daterangepicker-mobile.min.js"
   },
-
-  "dependencies": {
-  },
-
   "devDependencies": {
     "cross-env": "^5.2.0",
+    "external": "^1.0.0",
     "minimist": "^1.2.0",
-    "rollup": "^1.12.1",
+    "rollup": "^1.14.4",
     "rollup-plugin-buble": "^0.19.6",
-    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-terser": "^4.0.4",
-    "rollup-plugin-vue": "^5.0.0",
+    "rollup-plugin-uglify-es": "0.0.1",
+    "rollup-plugin-vue": "^4.7.2",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10"
   }
